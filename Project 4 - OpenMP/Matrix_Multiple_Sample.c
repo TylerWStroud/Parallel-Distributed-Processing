@@ -40,6 +40,10 @@ void matrixInit()
 
 int main()
 {
+    printf("Matrix size: %d x %d\n", N, N);
+    printf("Number of threads available: %d\n", omp_get_max_threads());
+   
+    // Initialize matrices
     matrixInit();
 
     //clock_t t1 = clock(); 
@@ -50,7 +54,7 @@ int main()
     double t1 = omp_get_wtime();
     matrixMulti();
     double t2 = omp_get_wtime();
-    printf("serial   time: %3f\n", ((double)t2 - t1) / CLOCKS_PER_SEC * 1000000.0);
+    printf("Serial multiplication time: %3f\n", ((double)t2 - t1) / CLOCKS_PER_SEC * 1000000.0);
 
     return 0;
 }

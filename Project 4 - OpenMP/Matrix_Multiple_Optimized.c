@@ -59,10 +59,15 @@ void matrixInit()
     #pragma omp parallel for collapse(2)
     for(int row = 0 ; row < N ; row++ ) {
         for(int col = 0 ; col < N ;col++){
+            srand(row+col);
+            firstMatrix [row] [col] = ( rand() % 10 ) * FactorIntToDouble;
+            secondMatrix [row] [col] = ( rand() % 10 ) * FactorIntToDouble;
+            
             // Each thread needs its own seed to avoid race conditions
-            unsigned int seed = row * N + col;
-            firstMatrix [row] [col] = ( rand_r(&seed) % 10 ) * FactorIntToDouble;
-            secondMatrix [row] [col] = ( rand_r(&seed) % 10 ) * FactorIntToDouble;
+
+            // unsigned int seed = row * N + col;
+            // firstMatrix [row] [col] = ( rand_r(&seed) % 10 ) * FactorIntToDouble;
+            // secondMatrix [row] [col] = ( rand_r(&seed) % 10 ) * FactorIntToDouble;
         }
     }
 }
@@ -73,17 +78,14 @@ int main()
     printf("Number of threads available: %d\n", omp_get_max_threads());
     
     // Initialize matrices
-    double init_start = omp_get_wtime();
     matrixInit();
-    double init_end = omp_get_wtime();
-    printf("Initialization time: %.3f seconds\n", init_end - init_start);
 
     // Parallel matrix multiplication
     double t1 = omp_get_wtime();
     matrixMulti();  // Using the basic parallel version
     double t2 = omp_get_wtime();
     
-    printf("Parallel multiplication time: %.3f seconds\n", t2 - t1);
+    printf("Parallel multiplication time: %.3f seconds\n", ((double)t2 - t1) / CLOCKS_PER_SEC * 1000000.0);
 
     return 0;
 }
