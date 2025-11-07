@@ -5,7 +5,9 @@
 ## Background  
 
 Matrix multiplication, despite being a fundamentally simple mathematical operation, reveals remarkable depth and complexity when optimized for high-performance computing. In modern computer design, especially in the context of AI and scientific computing, accelerating matrix multiplication has become a central focus.
-<br>For instance, NVIDIA’s recent GPU architectures exemplify this trend. Many of the most significant advancements in chipslike the H100 and B200 are specifically engineered to enhance matrix multiplication throughput:<br>
+<br>
+
+For instance, NVIDIA’s recent GPU architectures exemplify this trend. Many of the most significant advancements in chipslike the H100 and B200 are specifically engineered to enhance matrix multiplication throughput:<br>
 
     + Tensor Cores: Specialized co-processors designed exclusively for matrix operations, now capable of handling larger tile sizes than previous generations.
     + Tensor Memory: A newly introduced cache optimized for storing intermediate results
