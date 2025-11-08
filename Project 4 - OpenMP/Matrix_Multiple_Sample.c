@@ -3,7 +3,7 @@
 #include <time.h>
 #include <stdlib.h>
 
-#define N 2048
+#define N 4096
 #define FactorIntToDouble 1.1; 
 
 double firstMatrix [N] [N] = {0.0};
@@ -40,17 +40,11 @@ void matrixInit()
 
 int main()
 {
-    printf("Matrix size: %d x %d\n", N, N);
-    printf("Number of threads available: %d\n", omp_get_max_threads());
-   
+    printf("Sequential: %d x %d running...\n", N, N);
     // Initialize matrices
     matrixInit();
 
-    //clock_t t1 = clock(); 
-    //matrixMulti();
-    //clock_t t2 = clock(); 
-    //printf("time: %ld", t2-t1);
-
+    // Sequential matrix multiplication
     double t1 = omp_get_wtime();
     matrixMulti();
     double t2 = omp_get_wtime();
